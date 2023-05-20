@@ -1,33 +1,25 @@
-function calculateMinCost() {
-  //your code here
-
-	const input = document.getElementById('rope-lengths');
-
-	const arr = input.split(',');
-	console.log(arr);
+const result = document.getElementById('result');
+const arr = document.getElementById('rope-length').split(',');
 	
- //  const input = document.getElementById("rope-lengths").value;
+function calculateMinCost() {
+  
+  const minHeap = new PriorityQueue();
+	for(const len of arr){
+		minHeap.add(len);
+	}
 
-	// const arr = input.split(",");
+	let cost = 0;
 
-	// const heap = new Heap();
+	while(minHeap.size() > 1) {
+		const min1 = minHeap.poll();
+		const min2 = minHeap.poll();
 
+		const sum = min1 + min2;
 
-	// for(const lenght of arr){
-	// 	heap.add(lenght);
-	// }
+		minHeap.add(sum);
 
-	// let cost = 0;
-
-	// while (!heap.isEmpty()) {
-	// 	const rope1 = heap.remove();
-	// 	const rope2 = heap.remove();
-
-	// 	cost += rope1 + rope2;
-
-
-	// 	heap.add(rope1 + rope2);
-	// }
-
-	// document.getElementById("result").innerHTML = cost;
+		cost += sum;
+	}
+	
+	result.innerText = cost;
 }  
